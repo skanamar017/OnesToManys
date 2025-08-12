@@ -9,7 +9,7 @@ This means it will have a REST API middle-end, with a relational database backen
 
 It has three phases.
 
-### Phase 1 (week 4)
+### Phase 1 (days 1-2)
 
 - build a plan for the project
 - design the database schema by building out data objects
@@ -20,7 +20,7 @@ It has three phases.
   - continue with `curl` and doing a GET of your _detail_ table
   - add the other CRUD operations for both master and detail tables
 
-### Phase 2 (week 4)
+### Phase 2 (days 3-4)
 
 - add a one to many relationship between your master and detail tables
 - add REST API endpoints for the one to many relationship
@@ -28,7 +28,7 @@ It has three phases.
   - you might use Postman or Insomnia, or even Everest.
 - add a means to dump and load your data to either SQL and/or JSON files
 
-### Phase 3 (week 6)
+### Phase 3 (days 5-7)
 
 - create a simple Vanilla JavaScript application to interact with your REST API
 - do the same with React
