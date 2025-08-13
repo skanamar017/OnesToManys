@@ -16,7 +16,7 @@ class TrainerPokemon(BaseModel):
     level: int
     current_hp: int
 
-class UserDatabase:
+class PokemonDatabase:
     def __init__(self, db_path: str = "pokemon.db"):
         self.db_path = db_path
         self.init_db()
