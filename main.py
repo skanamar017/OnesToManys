@@ -50,8 +50,8 @@ def create_trainer_pokemon(tp: TrainerPokemon):
         raise HTTPException(status_code=400, detail=f"Failed to create TrainerPokemon: {str(e)}")
 
 @app.get("/trainerpokemon/{tp_id}", response_model=TrainerPokemon)
-def get_trainer(tp_id: int):
-    tp = db.get_trainer(tp_id)
+def get_trainer_pokemon(tp_id: int):
+    tp = db.get_trainer_pokemon(tp_id)
     if tp is None:
         raise HTTPException(status_code=404, detail="Trainer not found")
     return tp
