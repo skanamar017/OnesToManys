@@ -35,7 +35,6 @@ CREATE TABLE PokemonMove (
     pokemon_id INT NOT NULL,
     move_id INT NOT NULL,
     level_learned INT,
-    PRIMARY KEY (pokemon_id, move_id),
     FOREIGN KEY (pokemon_id) REFERENCES Pokemon(id),
     FOREIGN KEY (move_id) REFERENCES Move(id)
 );

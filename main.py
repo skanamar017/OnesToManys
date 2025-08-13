@@ -17,16 +17,16 @@ def create_trainer(trainer: Trainer):
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Failed to create trainer: {str(e)}")
 
-@app.get("/trainer/", response_model=List[Trainer])
-def get_all_trainers():
-    return db.get_all_trainers()
-
 @app.get("/trainer/{trainer_id}", response_model=Trainer)
 def get_trainer(trainer_id: int):
     trainer = db.get_trainer(trainer_id)
     if trainer is None:
         raise HTTPException(status_code=404, detail="Trainer not found")
     return trainer
+
+@app.get("/trainer/", response_model=List[Trainer])
+def get_all_trainers():
+    return db.get_all_trainers()
 
 @app.put("/trainer/{trainer_id}", response_model=Trainer)
 def update_trainer(trainer_id: int, trainer: Trainer):
@@ -49,9 +49,16 @@ def create_trainer_pokemon(tp: TrainerPokemon):
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Failed to create TrainerPokemon: {str(e)}")
 
+@app.get("/trainerpokemon/{tp_id}", response_model=TrainerPokemon)
+def get_trainer(tp_id: int):
+    tp = db.get_trainer(tp_id)
+    if tp is None:
+        raise HTTPException(status_code=404, detail="Trainer not found")
+    return tp
+
 @app.get("/trainerpokemon/{tp_id}", response_model=List[TrainerPokemon])
-def get_trainer_pokemon(tp_id: int):
-    return db.get_trainer_pokemon(tp_id)
+def get_all_trainer_pokemons():
+    return db.get_all_trainer_pokemons()
 
 @app.put("/trainerpokemon/{tp_id}", response_model=TrainerPokemon)
 def update_trainer_pokemon(tp_id: int, tp: TrainerPokemon):
