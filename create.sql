@@ -51,6 +51,6 @@ CREATE TABLE TrainerPokemon (
     nickname VARCHAR(50),
     level INT CHECK (level BETWEEN 1 AND 100),
     current_hp INT NOT NULL,
-    FOREIGN KEY (trainer_id) REFERENCES Trainer(id),
+    FOREIGN KEY (trainer_id) REFERENCES Trainers(id),
     FOREIGN KEY (pokemon_id) REFERENCES Pokemon(id)
 );

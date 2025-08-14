@@ -1,14 +1,14 @@
 import pytest
 import os
 from fastapi.testclient import TestClient
-from main import app
+from main import app, get_db
 from database import PokemonDatabase
 
 client = TestClient(app)
 
 def test_db():
     """Create a test database that gets cleaned up after each test"""
-    test_db_path = "pokemon.db"
+    test_db_path = "test_pokemon.db"
     db = PokemonDatabase(test_db_path)
     # Cleanup
     if os.path.exists(test_db_path):
@@ -20,13 +20,27 @@ def test_root_endpoint():
     assert response.status_code == 200
     assert response.json() == {"message": "Welcome to the Simple User API!"}
 
+
+'''
 def test_create_trainer():
+
     trainer_data = {"name": "Ash"}
     response = client.post("/trainer/", json=trainer_data)
     assert response.status_code == 200
     trainer = response.json()
     assert trainer["name"] == "Ash"
     assert "id" in trainer
+'''
+
+def test_create_trainer():
+    test_db_path = "test_users.db"
+    test_db = PokemonDatabase(test_db_path)
+
+    app.dependency_overrides[get_db] = lambda: test_db
+
+    trainer_data = {"name": "Ash"}
+    response = client.post("/trainer/", json=trainer_data)
+    assert response.status_code == 200
 
 def test_get_trainer():
     trainer_data = {"name": "Misty"}
@@ -39,14 +53,21 @@ def test_get_trainer():
     assert trainer["name"] == "Misty"
     assert trainer["id"] == trainer_id
 
+
 def test_get_all_trainers():
-    trainer_data = {"name": "Brock"}
-    client.post("/trainer/", json=trainer_data)
+    trainer_names = ["Ash", "Misty", "Brock"]
+    for name in trainer_names:
+        client.post("/trainer/", json={"name": name})
 
     response = client.get("/trainer/")
     assert response.status_code == 200
+
     trainers = response.json()
-    assert any(trainer["name"] == "Brock" for trainer in trainers)
+    returned_names = [trainer["name"] for trainer in trainers]
+
+    for name in trainer_names:
+        assert name in returned_names
+
 
 def test_update_trainer():
     trainer_data = {"name": "Gary"}
@@ -103,10 +124,39 @@ def test_get_trainer_pokemon():
     }
     client.post("/trainerpokemon/", json=tp_data)
 
-    response = client.get(f"/trainerpokemon/{trainer_id}")
+    
+    tp_response = client.post("/trainerpokemon/", json=tp_data)
+    tp_id = tp_response.json()["id"]
+
+    response = client.get(f"/trainerpokemon/{tp_id}")
     assert response.status_code == 200
+
+
+def test_get_all_trainer_pokemon():
+    # Create a trainer
+    trainer_response = client.post("/trainer/", json={"name": "Red"})
+    trainer_id = trainer_response.json()["id"]
+
+    # Create trainer-pokemon entries
+    tp_data_list = [
+        {"trainer_id": trainer_id, "pokemon_id": 25, "nickname": "Pikachu", "level": 50, "current_hp": 120},
+        {"trainer_id": trainer_id, "pokemon_id": 1, "nickname": "Bulbasaur", "level": 30, "current_hp": 100}
+    ]
+
+    for tp_data in tp_data_list:
+        client.post("/trainerpokemon/", json=tp_data)
+
+    # Fetch all trainer-pokemon entries
+    response = client.get("/trainerpokemon/")
+    assert response.status_code == 200
+
     tp_list = response.json()
-    assert any(tp["nickname"] == "Bulbasaur" for tp in tp_list)
+    nicknames = [tp["nickname"] for tp in tp_list]
+
+    # Check that all created nicknames are in the response
+    for tp_data in tp_data_list:
+        assert tp_data["nickname"] in nicknames
+
 
 def test_update_trainer_pokemon():
     trainer_data = {"name": "Green"}

@@ -22,14 +22,15 @@ class PokemonDatabase:
         self.init_db()
 
     def init_db(self):
-        """Initialize the database using create.sql and insert.sql"""
+        """Initialize the database using create 4.sql and insert 7.sql"""
         if not os.path.exists(self.db_path):
             with sqlite3.connect(self.db_path) as conn:
                 for sql_file in ["create.sql", "insert.sql"]:
                     with open(sql_file, "r") as f:
                         sql_script = f.read()
-                        conn.executescript(sql_script)
+                    conn.executescript(sql_script)
                 conn.commit()
+
 
     def create_trainer(self, trainer: Trainer) -> Trainer:
         with sqlite3.connect(self.db_path) as conn:
@@ -89,12 +90,22 @@ class PokemonDatabase:
             conn.commit()
         return tp
 
-    def get_trainer_pokemon(self, trainer_id: int) -> List[TrainerPokemon]:
+    def get_trainer_pokemon(self, tp_id: int) -> Optional[TrainerPokemon]:
+        '''
         with sqlite3.connect(self.db_path) as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.execute("SELECT * FROM TrainerPokemon WHERE trainer_id = ?", (trainer_id,))
             rows = cursor.fetchall()
             return [TrainerPokemon(**dict(row)) for row in rows]
+        '''
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.execute("SELECT * FROM TrainerPokemon WHERE id = ?", (tp_id,))
+            row = cursor.fetchone()
+            if row:
+                return TrainerPokemon(**dict(row))
+            return None
+
 
     def get_all_trainer_pokemons(self) -> List[TrainerPokemon]:
         with sqlite3.connect(self.db_path) as conn:
