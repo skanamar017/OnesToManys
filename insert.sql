@@ -1,6 +1,6 @@
 
 
-
+-- remove Fairy typing and replace with gen 1 typing
 -- Sample Data for Pokemon Table
 -- Format: ('Name', 'Type1', 'Type2', HP, Attack, Defense, Special, Speed)
 INSERT INTO Pokemon (name, type1, type2, base_hp, base_attack, base_defense, base_special, base_speed) VALUES
@@ -84,9 +84,8 @@ INSERT INTO Pokemon (name, type1, type2, base_hp, base_attack, base_defense, bas
 ('Rapidash', 'Fire', NULL, 65, 100, 70, 80, 105),
 ('Slowpoke', 'Water', 'Psychic', 90, 65, 65, 40, 15),
 ('Slowbro', 'Water', 'Psychic', 95, 75, 110, 80, 30),
-('Magnemite', 'Electric', 'Steel', 25, 35, 70, 95, 45),
-('Magneton', 'Electric', 'Steel', 50, 60, 95, 120),
-('Magneton', 'Electric', 'Steel', 50, 60, 95, 120, 70),
+('Magnemite', 'Electric', NULL, 25, 35, 70, 95, 45),
+('Magneton', 'Electric', NULL, 50, 60, 95, 120, 70),
 ('Farfetchd', 'Normal', 'Flying', 52, 65, 55, 58, 60),
 ('Doduo', 'Normal', 'Flying', 35, 85, 45, 35, 75),
 ('Dodrio', 'Normal', 'Flying', 60, 110, 70, 60, 100),
@@ -162,7 +161,7 @@ INSERT INTO Pokemon (name, type1, type2, base_hp, base_attack, base_defense, bas
 
 
 
-INSERT INTO Move (name, type, power, accuracy) VALUES
+INSERT INTO Moves (name, type, power, accuracy) VALUES
 -- Normal Moves
 ('Tackle', 'Normal', 40, 100),
 ('Body Slam', 'Normal', 85, 100),
@@ -268,7 +267,7 @@ INSERT INTO Move (name, type, power, accuracy) VALUES
 
 
 
-INSERT INTO Trainers (trainer_id, name)
+INSERT INTO Trainers (name)
 VALUES
 ('Ash'),
 ('Misty'),

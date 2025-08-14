@@ -6,11 +6,9 @@ from database import PokemonDatabase
 
 client = TestClient(app)
 
-
-
 def test_db():
     """Create a test database that gets cleaned up after each test"""
-    test_db_path = "test_users.db"
+    test_db_path = "pokemon.db"
     db = PokemonDatabase(test_db_path)
     # Cleanup
     if os.path.exists(test_db_path):

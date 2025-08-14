@@ -21,7 +21,7 @@ CREATE TABLE Pokemon (
     FOREIGN KEY (type2) REFERENCES PokemonType(type_name)
 );
 
-CREATE TABLE Move (
+CREATE TABLE Moves (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(50) NOT NULL,
     type VARCHAR(20) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE Move (
     FOREIGN KEY (type) REFERENCES PokemonType(type_name)
 );
 
-CREATE TABLE PokemonMove (
+CREATE TABLE PokemonMoves (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     pokemon_id INT NOT NULL,
     move_id INT NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE PokemonMove (
     FOREIGN KEY (move_id) REFERENCES Move(id)
 );
 
-CREATE TABLE Trainer (
+CREATE TABLE Trainers (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100) NOT NULL
 );
@@ -50,6 +50,7 @@ CREATE TABLE TrainerPokemon (
     pokemon_id INT NOT NULL,
     nickname VARCHAR(50),
     level INT CHECK (level BETWEEN 1 AND 100),
+    current_hp INT NOT NULL,
     FOREIGN KEY (trainer_id) REFERENCES Trainer(id),
     FOREIGN KEY (pokemon_id) REFERENCES Pokemon(id)
 );
