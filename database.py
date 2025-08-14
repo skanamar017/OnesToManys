@@ -96,12 +96,13 @@ class PokemonDatabase:
             rows = cursor.fetchall()
             return [TrainerPokemon(**dict(row)) for row in rows]
 
-    def get_all_trainer_pokemons(self) -> List[Trainer]:
+    def get_all_trainer_pokemons(self) -> List[TrainerPokemon]:
         with sqlite3.connect(self.db_path) as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.execute("SELECT * FROM TrainerPokemon")
             rows = cursor.fetchall()
-            return [Trainer(**dict(row)) for row in rows]
+            return [TrainerPokemon(**dict(row)) for row in rows]
+
 
     def update_trainer_pokemon(self, tp_id: int, tp: TrainerPokemon) -> Optional[TrainerPokemon]:
         with sqlite3.connect(self.db_path) as conn:

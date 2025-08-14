@@ -1,4 +1,6 @@
 
+
+
 -- Sample Data for Pokemon Table
 -- Format: ('Name', 'Type1', 'Type2', HP, Attack, Defense, Special, Speed)
 INSERT INTO Pokemon (name, type1, type2, base_hp, base_attack, base_defense, base_special, base_speed) VALUES

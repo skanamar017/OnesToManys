@@ -56,7 +56,7 @@ def get_trainer_pokemon(tp_id: int):
         raise HTTPException(status_code=404, detail="Trainer not found")
     return tp
 
-@app.get("/trainerpokemon/{tp_id}", response_model=List[TrainerPokemon])
+@app.get("/trainerpokemon/", response_model=List[TrainerPokemon])
 def get_all_trainer_pokemons():
     return db.get_all_trainer_pokemons()
 
