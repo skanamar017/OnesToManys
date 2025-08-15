@@ -1,0 +1,29 @@
+curl http://localhost:8000/
+
+curl -X POST "http://localhost:8000/Trainers/" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Ethan"
+  }'
+
+
+curl http://localhost:8000/Trainers/
+
+
+curl http://localhost:8000/Trainers/1
+
+
+curl -X PUT "http://localhost:8000/Trainers/" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Silver"
+  }'
+
+
+curl -X DELETE http://localhost:8000/Trainers/1
+
+
+
+
+
+
