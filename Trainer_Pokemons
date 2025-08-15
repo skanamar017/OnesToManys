@@ -1,0 +1,202 @@
+[
+    {
+        "id": 1,
+        "trainer_id": 1,
+        "pokemon_id": 25,
+        "nickname": "Sparky",
+        "level": 10,
+        "current_hp": 35
+    },
+    {
+        "id": 2,
+        "trainer_id": 1,
+        "pokemon_id": 1,
+        "nickname": "Leafy",
+        "level": 8,
+        "current_hp": 45
+    },
+    {
+        "id": 3,
+        "trainer_id": 1,
+        "pokemon_id": 4,
+        "nickname": "Flare",
+        "level": 9,
+        "current_hp": 39
+    },
+    {
+        "id": 4,
+        "trainer_id": 1,
+        "pokemon_id": 7,
+        "nickname": "Bubbles",
+        "level": 8,
+        "current_hp": 44
+    },
+    {
+        "id": 5,
+        "trainer_id": 2,
+        "pokemon_id": 120,
+        "nickname": "Sting",
+        "level": 12,
+        "current_hp": 38
+    },
+    {
+        "id": 6,
+        "trainer_id": 2,
+        "pokemon_id": 121,
+        "nickname": "Shelly",
+        "level": 14,
+        "current_hp": 50
+    },
+    {
+        "id": 7,
+        "trainer_id": 2,
+        "pokemon_id": 54,
+        "nickname": "Quackers",
+        "level": 10,
+        "current_hp": 40
+    },
+    {
+        "id": 8,
+        "trainer_id": 3,
+        "pokemon_id": 95,
+        "nickname": "Onixy",
+        "level": 15,
+        "current_hp": 90
+    },
+    {
+        "id": 9,
+        "trainer_id": 3,
+        "pokemon_id": 74,
+        "nickname": "Geodude",
+        "level": 12,
+        "current_hp": 40
+    },
+    {
+        "id": 10,
+        "trainer_id": 3,
+        "pokemon_id": 111,
+        "nickname": "Zubats",
+        "level": 10,
+        "current_hp": 30
+    },
+    {
+        "id": 11,
+        "trainer_id": 4,
+        "pokemon_id": 26,
+        "nickname": "Bolt",
+        "level": 20,
+        "current_hp": 50
+    },
+    {
+        "id": 12,
+        "trainer_id": 4,
+        "pokemon_id": 25,
+        "nickname": "Sparky Jr.",
+        "level": 18,
+        "current_hp": 45
+    },
+    {
+        "id": 13,
+        "trainer_id": 5,
+        "pokemon_id": 71,
+        "nickname": "Vile",
+        "level": 16,
+        "current_hp": 60
+    },
+    {
+        "id": 14,
+        "trainer_id": 5,
+        "pokemon_id": 69,
+        "nickname": "Oddy",
+        "level": 14,
+        "current_hp": 45
+    },
+    {
+        "id": 15,
+        "trainer_id": 6,
+        "pokemon_id": 109,
+        "nickname": "Weezy",
+        "level": 17,
+        "current_hp": 55
+    },
+    {
+        "id": 16,
+        "trainer_id": 6,
+        "pokemon_id": 110,
+        "nickname": "Muk",
+        "level": 18,
+        "current_hp": 65
+    },
+    {
+        "id": 17,
+        "trainer_id": 6,
+        "pokemon_id": 43,
+        "nickname": "Venonat",
+        "level": 12,
+        "current_hp": 40
+    },
+    {
+        "id": 18,
+        "trainer_id": 7,
+        "pokemon_id": 64,
+        "nickname": "Alak",
+        "level": 20,
+        "current_hp": 55
+    },
+    {
+        "id": 19,
+        "trainer_id": 7,
+        "pokemon_id": 65,
+        "nickname": "Kadabra",
+        "level": 18,
+        "current_hp": 50
+    },
+    {
+        "id": 20,
+        "trainer_id": 8,
+        "pokemon_id": 59,
+        "nickname": "Magmy",
+        "level": 18,
+        "current_hp": 50
+    },
+    {
+        "id": 21,
+        "trainer_id": 8,
+        "pokemon_id": 60,
+        "nickname": "Ponyta",
+        "level": 16,
+        "current_hp": 55
+    },
+    {
+        "id": 22,
+        "trainer_id": 9,
+        "pokemon_id": 95,
+        "nickname": "Rokky",
+        "level": 22,
+        "current_hp": 90
+    },
+    {
+        "id": 23,
+        "trainer_id": 9,
+        "pokemon_id": 92,
+        "nickname": "Nido",
+        "level": 20,
+        "current_hp": 65
+    },
+    {
+        "id": 24,
+        "trainer_id": 10,
+        "pokemon_id": 121,
+        "nickname": "Stary",
+        "level": 18,
+        "current_hp": 50
+    },
+    {
+        "id": 25,
+        "trainer_id": 10,
+        "pokemon_id": 122,
+        "nickname": "Cloy",
+        "level": 16,
+        "current_hp": 45
+    }
+]

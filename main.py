@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException, Depends
 from typing import List
 from database import TrainerPokemon, Trainer, PokemonDatabase
 app = FastAPI(title="Simple User API", description="A basic user management API", version="1.0.0")
+import json
 
 
 test_db_path = "pokemon.db"
@@ -84,3 +85,18 @@ def delete_trainer_pokemon(tp_id: int, db: PokemonDatabase = Depends(get_db)):
     if not db.delete_trainer_pokemon(tp_id):
         raise HTTPException(status_code=404, detail="TrainerPokemon not found")
     return {"message": "TrainerPokemon deleted successfully"}
+
+
+
+
+
+
+trainers=db.get_all_trainers()
+
+with open("Trainers", "w") as f:
+    json.dump([trainer.dict() for trainer in trainers], f, indent=4)
+
+trainer_pokemon=db.get_all_trainer_pokemons()
+
+with open("Trainer_Pokemons", "w") as f:
+    json.dump([pokemon.dict() for pokemon in trainer_pokemon], f, indent=4)

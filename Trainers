@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "name": "Ash"
+    },
+    {
+        "id": 2,
+        "name": "Misty"
+    },
+    {
+        "id": 3,
+        "name": "Brock"
+    },
+    {
+        "id": 4,
+        "name": "Lt. Surge"
+    },
+    {
+        "id": 5,
+        "name": "Erika"
+    },
+    {
+        "id": 6,
+        "name": "Koga"
+    },
+    {
+        "id": 7,
+        "name": "Sabrina"
+    },
+    {
+        "id": 8,
+        "name": "Blaine"
+    },
+    {
+        "id": 9,
+        "name": "Giovanni"
+    },
+    {
+        "id": 10,
+        "name": "Lorelei"
+    },
+    {
+        "id": 11,
+        "name": "Silver"
+    },
+    {
+        "id": 12,
+        "name": "Ethan"
+    }
+]
