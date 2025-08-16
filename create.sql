@@ -1,3 +1,8 @@
+--change trainrs to have more detail
+--add gym members
+
+
+
 CREATE TABLE PokemonType (
     type_name VARCHAR(20) PRIMARY KEY
 );
@@ -8,7 +13,7 @@ INSERT INTO PokemonType (type_name) VALUES
 ('Psychic'), ('Bug'), ('Rock'), ('Ghost'), ('Dragon');
 
 CREATE TABLE Pokemon (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INT IDENTITY(1, 1) PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     type1 VARCHAR(20) NOT NULL,
     type2 VARCHAR(20),
@@ -22,7 +27,7 @@ CREATE TABLE Pokemon (
 );
 
 CREATE TABLE Moves (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INT IDENTITY(1, 1) PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     type VARCHAR(20) NOT NULL,
     power INT,
@@ -31,7 +36,7 @@ CREATE TABLE Moves (
 );
 
 CREATE TABLE PokemonMoves (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INT IDENTITY(1, 1) PRIMARY KEY,
     pokemon_id INT NOT NULL,
     move_id INT NOT NULL,
     level_learned INT,
@@ -40,12 +45,12 @@ CREATE TABLE PokemonMoves (
 );
 
 CREATE TABLE Trainers (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INT IDENTITY(1, 1) PRIMARY KEY,
     name VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE TrainerPokemon (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INT IDENTITY(1, 1) PRIMARY KEY,
     trainer_id INT NOT NULL,
     pokemon_id INT NOT NULL,
     nickname VARCHAR(50),

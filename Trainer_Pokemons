@@ -1,6 +1,6 @@
 [
     {
-        "id": 1,
+        "id": null,
         "trainer_id": 1,
         "pokemon_id": 25,
         "nickname": "Sparky",
@@ -8,7 +8,7 @@
         "current_hp": 35
     },
     {
-        "id": 2,
+        "id": null,
         "trainer_id": 1,
         "pokemon_id": 1,
         "nickname": "Leafy",
@@ -16,7 +16,7 @@
         "current_hp": 45
     },
     {
-        "id": 3,
+        "id": null,
         "trainer_id": 1,
         "pokemon_id": 4,
         "nickname": "Flare",
@@ -24,7 +24,7 @@
         "current_hp": 39
     },
     {
-        "id": 4,
+        "id": null,
         "trainer_id": 1,
         "pokemon_id": 7,
         "nickname": "Bubbles",
@@ -32,7 +32,7 @@
         "current_hp": 44
     },
     {
-        "id": 5,
+        "id": null,
         "trainer_id": 2,
         "pokemon_id": 120,
         "nickname": "Sting",
@@ -40,7 +40,7 @@
         "current_hp": 38
     },
     {
-        "id": 6,
+        "id": null,
         "trainer_id": 2,
         "pokemon_id": 121,
         "nickname": "Shelly",
@@ -48,7 +48,7 @@
         "current_hp": 50
     },
     {
-        "id": 7,
+        "id": null,
         "trainer_id": 2,
         "pokemon_id": 54,
         "nickname": "Quackers",
@@ -56,7 +56,7 @@
         "current_hp": 40
     },
     {
-        "id": 8,
+        "id": null,
         "trainer_id": 3,
         "pokemon_id": 95,
         "nickname": "Onixy",
@@ -64,7 +64,7 @@
         "current_hp": 90
     },
     {
-        "id": 9,
+        "id": null,
         "trainer_id": 3,
         "pokemon_id": 74,
         "nickname": "Geodude",
@@ -72,7 +72,7 @@
         "current_hp": 40
     },
     {
-        "id": 10,
+        "id": null,
         "trainer_id": 3,
         "pokemon_id": 111,
         "nickname": "Zubats",
@@ -80,7 +80,7 @@
         "current_hp": 30
     },
     {
-        "id": 11,
+        "id": null,
         "trainer_id": 4,
         "pokemon_id": 26,
         "nickname": "Bolt",
@@ -88,7 +88,7 @@
         "current_hp": 50
     },
     {
-        "id": 12,
+        "id": null,
         "trainer_id": 4,
         "pokemon_id": 25,
         "nickname": "Sparky Jr.",
@@ -96,7 +96,7 @@
         "current_hp": 45
     },
     {
-        "id": 13,
+        "id": null,
         "trainer_id": 5,
         "pokemon_id": 71,
         "nickname": "Vile",
@@ -104,7 +104,7 @@
         "current_hp": 60
     },
     {
-        "id": 14,
+        "id": null,
         "trainer_id": 5,
         "pokemon_id": 69,
         "nickname": "Oddy",
@@ -112,7 +112,7 @@
         "current_hp": 45
     },
     {
-        "id": 15,
+        "id": null,
         "trainer_id": 6,
         "pokemon_id": 109,
         "nickname": "Weezy",
@@ -120,7 +120,7 @@
         "current_hp": 55
     },
     {
-        "id": 16,
+        "id": null,
         "trainer_id": 6,
         "pokemon_id": 110,
         "nickname": "Muk",
@@ -128,7 +128,7 @@
         "current_hp": 65
     },
     {
-        "id": 17,
+        "id": null,
         "trainer_id": 6,
         "pokemon_id": 43,
         "nickname": "Venonat",
@@ -136,7 +136,7 @@
         "current_hp": 40
     },
     {
-        "id": 18,
+        "id": null,
         "trainer_id": 7,
         "pokemon_id": 64,
         "nickname": "Alak",
@@ -144,7 +144,7 @@
         "current_hp": 55
     },
     {
-        "id": 19,
+        "id": null,
         "trainer_id": 7,
         "pokemon_id": 65,
         "nickname": "Kadabra",
@@ -152,7 +152,7 @@
         "current_hp": 50
     },
     {
-        "id": 20,
+        "id": null,
         "trainer_id": 8,
         "pokemon_id": 59,
         "nickname": "Magmy",
@@ -160,7 +160,7 @@
         "current_hp": 50
     },
     {
-        "id": 21,
+        "id": null,
         "trainer_id": 8,
         "pokemon_id": 60,
         "nickname": "Ponyta",
@@ -168,7 +168,7 @@
         "current_hp": 55
     },
     {
-        "id": 22,
+        "id": null,
         "trainer_id": 9,
         "pokemon_id": 95,
         "nickname": "Rokky",
@@ -176,7 +176,7 @@
         "current_hp": 90
     },
     {
-        "id": 23,
+        "id": null,
         "trainer_id": 9,
         "pokemon_id": 92,
         "nickname": "Nido",
@@ -184,7 +184,7 @@
         "current_hp": 65
     },
     {
-        "id": 24,
+        "id": null,
         "trainer_id": 10,
         "pokemon_id": 121,
         "nickname": "Stary",
@@ -192,7 +192,7 @@
         "current_hp": 50
     },
     {
-        "id": 25,
+        "id": null,
         "trainer_id": 10,
         "pokemon_id": 122,
         "nickname": "Cloy",

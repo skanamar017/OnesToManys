@@ -1,50 +1,42 @@
 [
     {
-        "id": 1,
+        "id": null,
         "name": "Ash"
     },
     {
-        "id": 2,
+        "id": null,
         "name": "Misty"
     },
     {
-        "id": 3,
+        "id": null,
         "name": "Brock"
     },
     {
-        "id": 4,
+        "id": null,
         "name": "Lt. Surge"
     },
     {
-        "id": 5,
+        "id": null,
         "name": "Erika"
     },
     {
-        "id": 6,
+        "id": null,
         "name": "Koga"
     },
     {
-        "id": 7,
+        "id": null,
         "name": "Sabrina"
     },
     {
-        "id": 8,
+        "id": null,
         "name": "Blaine"
     },
     {
-        "id": 9,
+        "id": null,
         "name": "Giovanni"
     },
     {
-        "id": 10,
+        "id": null,
         "name": "Lorelei"
-    },
-    {
-        "id": 11,
-        "name": "Silver"
-    },
-    {
-        "id": 12,
-        "name": "Ethan"
     }
 ]

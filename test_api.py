@@ -110,7 +110,7 @@ def test_create_trainer_pokemon():
         "level": 50,
         "current_hp": 120
     }
-    response = client.post("/TrainerPokemon/", json=tp_data)
+    response = client.post(f"/Trainers/{trainer_id}/TrainerPokemon", json=tp_data)
     assert response.status_code == 200
     tp = response.json()
     assert tp["nickname"] == "Pikachu"
@@ -128,13 +128,13 @@ def test_get_trainer_pokemon():
         "level": 30,
         "current_hp": 100
     }
-    client.post("/TrainerPokemon/", json=tp_data)
+    client.post(f"/Trainers/{trainer_id}/TrainerPokemon", json=tp_data)
 
     
-    tp_response = client.post("/TrainerPokemon/", json=tp_data)
+    tp_response = client.post(f"/Trainers/{trainer_id}/TrainerPokemon", json=tp_data)
     tp_id = tp_response.json()["id"]
 
-    response = client.get(f"/TrainerPokemon/{tp_id}")
+    response = client.get(f"/Trainers/{trainer_id}/TrainerPokemon")
     assert response.status_code == 200
 
 
@@ -150,10 +150,10 @@ def test_get_all_trainer_pokemon():
     ]
 
     for tp_data in tp_data_list:
-        client.post("/trainerpokemon/", json=tp_data)
+        client.post(f"/Trainers/{trainer_id}/TrainerPokemon", json=tp_data)
 
     # Fetch all trainer-pokemon entries
-    response = client.get("/TrainerPokemon/")
+    response = client.get(f"/Trainers/{trainer_id}/TrainerPokemon")
     assert response.status_code == 200
 
     tp_list = response.json()
@@ -176,7 +176,7 @@ def test_update_trainer_pokemon():
         "level": 20,
         "current_hp": 80
     }
-    tp_response = client.post("/TrainerPokemon/", json=tp_data)
+    tp_response = client.post(f"/Trainers/{trainer_id}/TrainerPokemon", json=tp_data)
     tp_id = tp_response.json()["id"]
 
     updated_tp_data = {
@@ -186,7 +186,7 @@ def test_update_trainer_pokemon():
         "level": 35,
         "current_hp": 110
     }
-    response = client.put(f"/TrainerPokemon/{tp_id}", json=updated_tp_data)
+    response = client.put(f"/Trainers/{trainer_id}/TrainerPokemon/{tp_id}", json=updated_tp_data)
     assert response.status_code == 200
     updated_tp = response.json()
     assert updated_tp["nickname"] == "Charmeleon"
@@ -204,9 +204,9 @@ def test_delete_trainer_pokemon():
         "level": 25,
         "current_hp": 90
     }
-    tp_response = client.post("/TrainerPokemon/", json=tp_data)
+    tp_response = client.post(f"/Trainers/{trainer_id}/TrainerPokemon/", json=tp_data)
     tp_id = tp_response.json()["id"]
 
-    response = client.delete(f"/TrainerPokemon/{tp_id}")
+    response = client.delete(f"/Trainers/{trainer_id}/TrainerPokemon/{tp_id}")
     assert response.status_code == 200
     assert response.json()["message"] == "TrainerPokemon deleted successfully"

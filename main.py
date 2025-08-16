@@ -4,7 +4,7 @@ from database import TrainerPokemon, Trainer, PokemonDatabase
 app = FastAPI(title="Simple User API", description="A basic user management API", version="1.0.0")
 import json
 
-
+#
 test_db_path = "pokemon.db"
 db = PokemonDatabase(test_db_path)
 
@@ -55,32 +55,33 @@ def delete_trainer(trainer_id: int, db: PokemonDatabase = Depends(get_db)):
     return {"message": "Trainer deleted successfully"}
 
 # TrainerPokemon Endpoints
-@app.post("/TrainerPokemon/", response_model=TrainerPokemon)
+@app.post("/Trainers/{trainer_id}/TrainerPokemon/", response_model=TrainerPokemon)
 def create_trainer_pokemon(tp: TrainerPokemon, db: PokemonDatabase = Depends(get_db)):
     try:
         return db.create_trainer_pokemon(tp)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Failed to create TrainerPokemon: {str(e)}")
 
-@app.get("/TrainerPokemon/{tp_id}", response_model=TrainerPokemon)
+@app.get("/Trainers/{trainer_id}/TrainerPokemon/{tp_id}", response_model=TrainerPokemon)
 def get_trainer_pokemon(tp_id: int, db: PokemonDatabase = Depends(get_db)):
     tp = db.get_trainer_pokemon(tp_id)
     if tp is None:
         raise HTTPException(status_code=404, detail="Trainer not found")
     return tp
 
-@app.get("/TrainerPokemon/", response_model=List[TrainerPokemon])
-def get_all_trainer_pokemons(db: PokemonDatabase = Depends(get_db)):
-    return db.get_all_trainer_pokemons()
+@app.get("/Trainers/{trainer_id}/TrainerPokemon/", response_model=List[TrainerPokemon])
+def get_trainer_pokemons(trainer_id: int, db: PokemonDatabase = Depends(get_db)):
+    return db.get_trainer_pokemons_by_trainer_id(trainer_id)
 
-@app.put("/TrainerPokemon/{tp_id}", response_model=TrainerPokemon)
+
+@app.put("/Trainers/{trainer_id}/TrainerPokemon/{tp_id}", response_model=TrainerPokemon)
 def update_trainer_pokemon(tp_id: int, tp: TrainerPokemon, db: PokemonDatabase = Depends(get_db)):
     updated_tp = db.update_trainer_pokemon(tp_id, tp)
     if updated_tp is None:
         raise HTTPException(status_code=404, detail="TrainerPokemon not found")
     return updated_tp
 
-@app.delete("/TrainerPokemon/{tp_id}")
+@app.delete("/Trainers/{trainer_id}/TrainerPokemon/{tp_id}")
 def delete_trainer_pokemon(tp_id: int, db: PokemonDatabase = Depends(get_db)):
     if not db.delete_trainer_pokemon(tp_id):
         raise HTTPException(status_code=404, detail="TrainerPokemon not found")

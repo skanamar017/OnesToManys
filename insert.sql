@@ -1,5 +1,6 @@
 
 
+
 -- remove Fairy typing and replace with gen 1 typing
 -- Sample Data for Pokemon Table
 -- Format: ('Name', 'Type1', 'Type2', HP, Attack, Defense, Special, Speed)
@@ -295,8 +296,8 @@ VALUES
 (2, 54, 'Quackers', 10, 40),     -- Psyduck
 
 -- Brock's Pokémon
-(3, 95, 'Onixy', 15, 90),        -- Onix
-(3, 74, 'Geodude', 12, 40),      -- Geodude
+(8, 3, 95, 'Onixy', 15, 90),        -- Onix
+(13, 74, 'Geodude', 12, 40),      -- Geodude
 (3, 111, 'Zubats', 10, 30),      -- Zubat (if he caught one)
 
 -- Lt. Surge's Pokémon
@@ -327,4 +328,3 @@ VALUES
 -- Lorelei's Pokémon
 (10, 121, 'Stary', 18, 50),      -- Starmie
 (10, 122, 'Cloy', 16, 45);       -- Cloyster
-
