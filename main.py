@@ -1,3 +1,4 @@
+'''
 from fastapi import FastAPI, HTTPException, Depends
 from typing import List
 from database import TrainerPokemon, Trainer, PokemonDatabase
@@ -101,3 +102,4 @@ trainer_pokemon=db.get_all_trainer_pokemons()
 
 with open("Trainer_Pokemons", "w") as f:
     json.dump([pokemon.dict() for pokemon in trainer_pokemon], f, indent=4)
+'''
