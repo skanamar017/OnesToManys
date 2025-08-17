@@ -8,27 +8,64 @@
     li { margin-bottom: 6px; }
     button { margin-left: 6px; }
     .section { margin-bottom: 2em; }
+    .inline-form input { margin-right: 6px; }
+    .subsection { margin-top: 1em; }
+    .highlight { background: #f0f8ff; padding: 0.5em; border-radius: 4px; }
+    .clickable-trainer {
+      color: #1976d2;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-right: 8px;
+    }
   </style>
 </head>
 <body>
   <h1>Pokémon Trainer API Demo</h1>
 
   <div class="section">
-    <button id="loadTrainers">Load Trainers</button>
-    <ul id="trainersList"></ul>
+    <h2>Trainer Management</h2>
+    <div class="subsection highlight">
+      <strong>Load Trainers</strong><br>
+      <button id="loadTrainers">Load Trainers</button>
+  <button id="getTrainerWithPokemon">Get Trainer & Pokémon Info</button>
+      <p>Click to display all trainers. Click a trainer's name to view their Pokémon.</p>
+    </div>
+    <div class="subsection highlight">
+      <strong>Trainer List (Update/Delete)</strong>
+      <ul id="trainersList">
+        <!-- Trainers will be loaded here with Edit/Delete buttons (added dynamically) -->
+        <!-- add trainer list items here -->
+      </ul>
+      <p>Use the <b>Edit</b> button to update a trainer's name, or <b>Delete</b> to remove a trainer.</p>
+    </div>
+    <div class="subsection highlight">
+      <strong>Add Trainer</strong>
+      <div class="inline-form">
+        <input type="text" id="trainerName" placeholder="Trainer Name">
+        <button id="addTrainer">Add Trainer</button>
+      </div>
+    </div>
   </div>
 
   <div class="section">
-    <h2>Add Trainer</h2>
-    <input type="text" id="trainerName" placeholder="Trainer Name">
-    <button id="addTrainer">Add Trainer</button>
-  </div>
-
-  <div class="section">
-    <h2>Trainer's Pokémon</h2>
-    <ul id="pokemonList"></ul>
+    <h2>Trainer's Pokémon Management</h2>
+    <div class="subsection highlight">
+      <strong>Load Trainer's Pokémon</strong>
+      <p>Click a trainer's name above to load their Pokémon below.</p>
+    </div>
+    <div class="subsection highlight">
+      <strong>Pokémon List (Update/Delete/Add)</strong>
+      <ul id="pokemonList">
+        <!-- Trainer's Pokémon will be loaded here with Edit/Delete/Add buttons (added dynamically) -->
+         
+      </ul>
+      <p>
+        Use <b>Edit</b> to update a Pokémon's info, <b>Delete</b> to remove it, or <b>Add Pokémon</b> to add a new one for the selected trainer.
+      </p>
+    </div>
   </div>
 
   <script src="vanilla_js.js"></script>
+  <div id="trainerWithPokemonInfo" class="highlight" style="margin-top:2em;"></div>
 </body>
 </html>

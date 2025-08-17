@@ -13,7 +13,7 @@ INSERT INTO PokemonType (type_name) VALUES
 ('Psychic'), ('Bug'), ('Rock'), ('Ghost'), ('Dragon');
 
 CREATE TABLE Pokemon (
-    id INT IDENTITY(1, 1) PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(50) NOT NULL,
     type1 VARCHAR(20) NOT NULL,
     type2 VARCHAR(20),
@@ -27,7 +27,7 @@ CREATE TABLE Pokemon (
 );
 
 CREATE TABLE Moves (
-    id INT IDENTITY(1, 1) PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(50) NOT NULL,
     type VARCHAR(20) NOT NULL,
     power INT,
@@ -36,7 +36,7 @@ CREATE TABLE Moves (
 );
 
 CREATE TABLE PokemonMoves (
-    id INT IDENTITY(1, 1) PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     pokemon_id INT NOT NULL,
     move_id INT NOT NULL,
     level_learned INT,
@@ -45,12 +45,12 @@ CREATE TABLE PokemonMoves (
 );
 
 CREATE TABLE Trainers (
-    id INT IDENTITY(1, 1) PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE TrainerPokemon (
-    id INT IDENTITY(1, 1) PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     trainer_id INT NOT NULL,
     pokemon_id INT NOT NULL,
     nickname VARCHAR(50),

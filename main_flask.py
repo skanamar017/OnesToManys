@@ -1,13 +1,31 @@
+# Combined Trainer and Pokémon info endpoint
+
 from flask import Flask, request, jsonify
 from database import PokemonDatabase, Trainer, TrainerPokemon
 from typing import List
 import json
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 db = PokemonDatabase()
+
 
 @app.route("/", methods=["GET"])
 def read_root():
     return jsonify({"message": "Welcome to the Simple User API!"})
+
+
+@app.route("/Trainers/<int:trainer_id>/WithPokemon", methods=["GET"])
+def get_trainer_with_pokemon(trainer_id):
+    trainer = db.get_trainer(trainer_id)
+    if not trainer:
+        return jsonify({"error": "Trainer not found"}), 404
+    tps = db.get_trainer_pokemons_by_trainer_id(trainer_id)
+    return jsonify({
+        "trainer": trainer.dict(),
+        "pokemon": [tp.dict() for tp in tps]
+    }), 200
+
 
 # Trainer Endpoints
 @app.route("/Trainers/", methods=["POST"])
@@ -66,7 +84,9 @@ def get_trainer_pokemon(trainer_id, tp_id):
     return jsonify({"error": "TrainerPokemon not found"}), 404
 
 @app.route("/Trainers/<int:trainer_id>/TrainerPokemon/", methods=["GET"])
+@app.route("/Trainers/<int:trainer_id>/TrainerPokemon", methods=["GET"])
 def get_trainer_pokemons(trainer_id):
+    print(f"[DEBUG] get_trainer_pokemons called for trainer_id={trainer_id}")
     tps = db.get_trainer_pokemons_by_trainer_id(trainer_id)
     return jsonify([tp.dict() for tp in tps]), 200
 

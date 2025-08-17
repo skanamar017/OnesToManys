@@ -296,8 +296,8 @@ VALUES
 (2, 54, 'Quackers', 10, 40),     -- Psyduck
 
 -- Brock's Pokémon
-(8, 3, 95, 'Onixy', 15, 90),        -- Onix
-(13, 74, 'Geodude', 12, 40),      -- Geodude
+(8, 95, 'Onixy', 15, 90),        -- Onix
+(3, 74, 'Geodude', 12, 40),      -- Geodude
 (3, 111, 'Zubats', 10, 30),      -- Zubat (if he caught one)
 
 -- Lt. Surge's Pokémon
