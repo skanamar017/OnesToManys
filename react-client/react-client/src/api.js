@@ -61,3 +61,10 @@ export async function deleteTrainerPokemon(trainerId, tpId) {
   const res = await fetch(`${API_BASE}/Trainers/${trainerId}/TrainerPokemon/${tpId}`, { method: "DELETE" });
   return res.json();
 }
+
+export async function getAllPokemon(type) {
+  let url = `${API_BASE}/Pokemon/`;
+  if (type) url += `?type=${encodeURIComponent(type)}`;
+  const res = await fetch(url);
+  return res.json();
+}

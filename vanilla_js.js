@@ -149,17 +149,31 @@ async function loadTrainerPokemon(trainerId) {
       alert(`Error: Could not fetch trainer's Pokémon. Status: ${res.status}`);
       return;
     }
-    const pokemon = await res.json();
-    const list = document.getElementById("pokemonList");
+    const trainerPokemon = await res.json();
+    const list = document.getElementById("trainerPokemonList");
     list.innerHTML = "";
-    if (!Array.isArray(pokemon) || pokemon.length === 0) {
+    if (!Array.isArray(trainerPokemon) || trainerPokemon.length === 0) {
       const li = document.createElement("li");
       li.textContent = "No Pokémon found for this trainer.";
       list.appendChild(li);
     } else {
-      pokemon.forEach(tp => {
+      // Fetch Pokémon species info for all unique pokemon_id in this trainer's list
+      const uniqueIds = [...new Set(trainerPokemon.map(tp => tp.pokemon_id))];
+      const speciesMap = {};
+      if (uniqueIds.length > 0) {
+        // Fetch all species in one go (could be optimized, but fine for small sets)
+        const resSpecies = await fetch(`${apiBase}/Pokemon/`);
+        const allSpecies = await resSpecies.json();
+        uniqueIds.forEach(id => {
+          const found = allSpecies.find(p => p.id === id || p.pokedex_number === id);
+          if (found) speciesMap[id] = found;
+        });
+      }
+      trainerPokemon.forEach(tp => {
         const li = document.createElement("li");
-        li.textContent = `${tp.nickname || "No Nickname"} (Level: ${tp.level})`;
+        const species = speciesMap[tp.pokemon_id];
+        li.textContent = `${tp.nickname || "No Nickname"} (Level: ${tp.level})` +
+          (species ? ` — Species: #${species.pokedex_number} ${species.name} (Type: ${species.type1}${species.type2 ? '/' + species.type2 : ''})` : '');
         // Edit and Delete buttons for TrainerPokemon
         const editBtn = document.createElement("button");
         editBtn.textContent = "Edit";
@@ -250,3 +264,50 @@ async function deleteTrainerPokemon(trainerId, tpId) {
   });
   if (!res.ok) alert("Error deleting Pokémon");
 }
+
+/* ===========================
+   POKÉMON TABLE OPERATIONS
+   =========================== */
+
+// Show all Pokémon in the Pokémon table
+document.getElementById("showAllPokemon").onclick = async function() {
+  const res = await fetch(`${apiBase}/Pokemon/`);
+  const pokemon = await res.json();
+  const list = document.getElementById("pokemonList");
+  list.innerHTML = "";
+  if (!pokemon.length) {
+    const li = document.createElement("li");
+    li.textContent = "No Pokémon found.";
+    list.appendChild(li);
+    return;
+  }
+  pokemon.forEach(p => {
+    const li = document.createElement("li");
+    li.textContent = `#${p.pokedex_number} ${p.name} (Type: ${p.type1}${p.type2 ? '/' + p.type2 : ''}, HP: ${p.base_hp}, Atk: ${p.base_attack}, Def: ${p.base_defense}, Spc: ${p.base_special}, Spd: ${p.base_speed})`;
+    list.appendChild(li);
+  });
+};
+
+// Filter Pokémon by type
+document.getElementById("filterPokemonByType").onclick = async function() {
+  const typeFilter = document.getElementById("pokemonTypeFilter").value.trim();
+  if (!typeFilter) {
+    alert("Enter a type to filter by (e.g. Fire, Water, Grass)");
+    return;
+  }
+  const res = await fetch(`${apiBase}/Pokemon/?type=${encodeURIComponent(typeFilter)}`);
+  const pokemon = await res.json();
+  const list = document.getElementById("pokemonList");
+  list.innerHTML = "";
+  if (!pokemon.length) {
+    const li = document.createElement("li");
+    li.textContent = `No Pokémon found for type '${typeFilter}'.`;
+    list.appendChild(li);
+    return;
+  }
+  pokemon.forEach(p => {
+    const li = document.createElement("li");
+    li.textContent = `#${p.pokedex_number} ${p.name} (Type: ${p.type1}${p.type2 ? '/' + p.type2 : ''}, HP: ${p.base_hp}, Atk: ${p.base_attack}, Def: ${p.base_defense}, Spc: ${p.base_special}, Spd: ${p.base_speed})`;
+    list.appendChild(li);
+  });
+};

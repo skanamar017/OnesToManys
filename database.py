@@ -1,8 +1,10 @@
-
 import sqlite3
 from typing import Optional, List
 from pydantic import BaseModel
 import os
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
 
 class Trainer(BaseModel):
     id: Optional[int] = None
@@ -146,3 +148,17 @@ class PokemonDatabase:
             deleted = conn.total_changes > 0
             conn.commit()
             return deleted
+
+    @app.route("/Pokemon/", methods=["GET"])
+    def get_all_pokemon():
+        # Optional: filter by query param, e.g., ?type=Fire
+        poke_type = request.args.get("type")
+        with sqlite3.connect("pokemon.db") as conn:
+            conn.row_factory = sqlite3.Row
+            if poke_type:
+                cursor = conn.execute("SELECT * FROM Pokemon WHERE type1 = ? OR type2 = ?", (poke_type, poke_type))
+            else:
+                cursor = conn.execute("SELECT * FROM Pokemon")
+            rows = cursor.fetchall()
+            result = [dict(row) for row in rows]
+        return jsonify(result), 200

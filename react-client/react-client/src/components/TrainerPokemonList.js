@@ -1,21 +1,40 @@
+
 import React, { useEffect, useState } from "react";
 import {
   getTrainerPokemons,
   addTrainerPokemon,
   updateTrainerPokemon,
   deleteTrainerPokemon,
+  getAllPokemon,
 } from "../api";
+
 
 export default function TrainerPokemonList({ trainer }) {
   const [pokemons, setPokemons] = useState([]);
+  const [speciesMap, setSpeciesMap] = useState({});
   const [form, setForm] = useState({ pokemon_id: "", nickname: "", level: "", current_hp: "" });
+
 
   useEffect(() => {
     if (trainer) loadPokemons();
   }, [trainer]);
 
   async function loadPokemons() {
-    setPokemons(await getTrainerPokemons(trainer.id));
+    const tps = await getTrainerPokemons(trainer.id);
+    setPokemons(tps);
+    // Fetch species info for all unique pokemon_id
+    const uniqueIds = [...new Set(tps.map(tp => tp.pokemon_id))];
+    if (uniqueIds.length > 0) {
+      const allSpecies = await getAllPokemon();
+      const map = {};
+      uniqueIds.forEach(id => {
+        const found = allSpecies.find(p => p.id === id || p.pokedex_number === id);
+        if (found) map[id] = found;
+      });
+      setSpeciesMap(map);
+    } else {
+      setSpeciesMap({});
+    }
   }
 
   async function handleAdd(e) {
@@ -85,13 +104,19 @@ export default function TrainerPokemonList({ trainer }) {
         <button type="submit">Add Pokémon</button>
       </form>
       <ul>
-        {pokemons.map(tp => (
-          <li key={tp.id}>
-            {tp.nickname || "No Nickname"} (Pokémon ID: {tp.pokemon_id}, Level: {tp.level}, HP: {tp.current_hp})
-            <button onClick={() => handleEdit(tp)}>Edit</button>
-            <button onClick={() => handleDelete(tp.id)}>Delete</button>
-          </li>
-        ))}
+        {pokemons.map(tp => {
+          const species = speciesMap[tp.pokemon_id];
+          return (
+            <li key={tp.id}>
+              {tp.nickname || "No Nickname"} (Level: {tp.level}, HP: {tp.current_hp})
+              {species && (
+                <> — Species: #{species.pokedex_number} {species.name} (Type: {species.type1}{species.type2 ? '/' + species.type2 : ''})</>
+              )}
+              <button onClick={() => handleEdit(tp)}>Edit</button>
+              <button onClick={() => handleDelete(tp.id)}>Delete</button>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

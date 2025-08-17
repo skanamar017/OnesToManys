@@ -62,14 +62,20 @@
       <p>Click a trainer's name above to load their Pokémon below.</p>
     </div>
     <div class="subsection highlight">
-      <strong>Pokémon List (Update/Delete/Add)</strong>
-      <ul id="pokemonList">
-        <!-- Trainer's Pokémon will be loaded here with Edit/Delete/Add buttons (added dynamically) -->
-         
-      </ul>
+      <strong>Trainer's Pokémon (Update/Delete/Add)</strong>
+      <ul id="trainerPokemonList"></ul>
       <p>
         Use <b>Edit</b> to update a Pokémon's info, <b>Delete</b> to remove it, or <b>Add Pokémon</b> to add a new one for the selected trainer.
       </p>
+    </div>
+    <div class="subsection highlight">
+      <strong>Pokémon Species List (Pokémon Table)</strong>
+      <div>
+        <input type="text" id="pokemonTypeFilter" placeholder="Type (e.g. Fire)">
+        <button id="showAllPokemon">Show All Pokémon</button>
+        <button id="filterPokemonByType">Filter by Type</button>
+        <ul id="pokemonList"></ul>
+      </div>
     </div>
   </div>
 

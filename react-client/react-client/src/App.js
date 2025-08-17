@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TrainerList from "./components/TrainerList";
 import TrainerPokemonList from "./components/TrainerPokemonList";
+import PokemonSpeciesList from "./components/PokemonSpeciesList";
 import "./App.css";
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
       <TrainerList onSelect={setSelectedTrainer} />
       <hr />
       <TrainerPokemonList trainer={selectedTrainer} />
+      <hr />
+      <PokemonSpeciesList />
     </div>
   );
 }

@@ -4,6 +4,7 @@ from flask import Flask, request, jsonify
 from database import PokemonDatabase, Trainer, TrainerPokemon
 from typing import List
 import json
+import sqlite3
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -104,6 +105,20 @@ def delete_trainer_pokemon(trainer_id, tp_id):
     if db.delete_trainer_pokemon(tp_id):
         return jsonify({"message": "TrainerPokemon deleted successfully"}), 200
     return jsonify({"error": "TrainerPokemon not found"}), 404
+
+@app.route("/Pokemon/", methods=["GET"])
+def get_all_pokemon():
+    # Optional: filter by query param, e.g., ?type=Fire
+    poke_type = request.args.get("type")
+    with sqlite3.connect("pokemon.db") as conn:
+        conn.row_factory = sqlite3.Row
+        if poke_type:
+            cursor = conn.execute("SELECT * FROM Pokemon WHERE type1 = ? OR type2 = ?", (poke_type, poke_type))
+        else:
+            cursor = conn.execute("SELECT * FROM Pokemon")
+        rows = cursor.fetchall()
+        result = [dict(row) for row in rows]
+    return jsonify(result), 200
 
 if __name__ == "__main__":
     app.run(debug=True)
