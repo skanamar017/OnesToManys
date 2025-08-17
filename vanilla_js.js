@@ -15,7 +15,11 @@ document.getElementById("loadTrainers").onclick = async function() {
     const li = document.createElement("li");
     // Create a clickable span for the trainer name
     const nameSpan = document.createElement("span");
-    nameSpan.textContent = trainer.name + " (id: " + trainer.id + ")";
+    // Show all info: name, id, age, gender, occupation
+    nameSpan.textContent = `${trainer.name} (id: ${trainer.id})` +
+      (trainer.age ? `, Age: ${trainer.age}` : '') +
+      (trainer.gender ? `, Gender: ${trainer.gender}` : '') +
+      (trainer.occupation ? `, Occupation: ${trainer.occupation}` : '');
     nameSpan.className = "clickable-trainer";
     nameSpan.style.cursor = "pointer";
     nameSpan.onclick = () => loadTrainerPokemon(trainer.id);
@@ -71,22 +75,36 @@ document.getElementById("getTrainerWithPokemon").onclick = async function() {
   }
   const data = await res.json();
   const infoDiv = document.getElementById('trainerWithPokemonInfo');
-  infoDiv.innerHTML = `<b>Trainer:</b> ${data.trainer.name} (id: ${data.trainer.id})<br><b>Pokémon:</b><ul>` +
+  infoDiv.innerHTML = `<b>Trainer:</b> ${data.trainer.name} (id: ${data.trainer.id})` +
+    (data.trainer.age ? `, Age: ${data.trainer.age}` : '') +
+    (data.trainer.gender ? `, Gender: ${data.trainer.gender}` : '') +
+    (data.trainer.occupation ? `, Occupation: ${data.trainer.occupation}` : '') +
+    `<br><b>Pokémon:</b><ul>` +
     (data.pokemon.length ? data.pokemon.map(p => `<li>${p.nickname || 'No Nickname'} (Pokémon ID: ${p.pokemon_id}, Level: ${p.level}, HP: ${p.current_hp})</li>`).join('') : '<li>No Pokémon</li>') + '</ul>';
 };
 
 // --- Add Trainer ---
 document.getElementById("addTrainer").onclick = async function() {
   const name = document.getElementById("trainerName").value;
+  const age = document.getElementById("trainerAge").value;
+  const gender = document.getElementById("trainerGender").value;
+  const occupation = document.getElementById("trainerOccupation").value;
   if (!name) return alert("Enter a name!");
+  const trainerData = { name };
+  if (age) trainerData.age = Number(age);
+  if (gender) trainerData.gender = gender;
+  if (occupation) trainerData.occupation = occupation;
   const res = await fetch(`${apiBase}/Trainers/`, {
     method: "POST",
     headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({name})
+    body: JSON.stringify(trainerData)
   });
   if (res.ok) {
     alert("Trainer added!");
     document.getElementById("trainerName").value = "";
+    document.getElementById("trainerAge").value = "";
+    document.getElementById("trainerGender").value = "";
+    document.getElementById("trainerOccupation").value = "";
     document.getElementById("loadTrainers").click();
   } else {
     alert("Error adding trainer");

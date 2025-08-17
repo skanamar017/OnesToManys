@@ -7,6 +7,9 @@ import os
 class Trainer(BaseModel):
     id: Optional[int] = None
     name: str
+    age: Optional[int] = None
+    gender: Optional[str] = None
+    occupation: Optional[str] = None
 
 class TrainerPokemon(BaseModel):
     id: Optional[int] = None
@@ -35,8 +38,8 @@ class PokemonDatabase:
     def create_trainer(self, trainer: Trainer) -> Trainer:
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.execute(
-                "INSERT INTO Trainers (name) VALUES (?)",
-                (trainer.name,)
+                "INSERT INTO Trainers (name, age, gender, occupation) VALUES (?, ?, ?, ?)",
+                (trainer.name, trainer.age, trainer.gender, trainer.occupation)
             )
             trainer.id = cursor.lastrowid
             conn.commit()

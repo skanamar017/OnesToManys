@@ -14,6 +14,7 @@ INSERT INTO PokemonType (type_name) VALUES
 
 CREATE TABLE Pokemon (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    pokedex_number INT NOT NULL,
     name VARCHAR(50) NOT NULL,
     type1 VARCHAR(20) NOT NULL,
     type2 VARCHAR(20),
@@ -22,6 +23,7 @@ CREATE TABLE Pokemon (
     base_defense INT NOT NULL CHECK (base_defense >= 0),
     base_special INT NOT NULL CHECK (base_special >= 0),
     base_speed INT NOT NULL CHECK (base_speed >= 0),
+    entry VARCHAR(255),
     FOREIGN KEY (type1) REFERENCES PokemonType(type_name),
     FOREIGN KEY (type2) REFERENCES PokemonType(type_name)
 );
@@ -46,7 +48,11 @@ CREATE TABLE PokemonMoves (
 
 CREATE TABLE Trainers (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(100) NOT NULL
+    name VARCHAR(100) NOT NULL,
+    age INT CHECK (age > 0),
+    gender VARCHAR(10) CHECK (gender IN ('Male', 'Female', 'Other')),
+    occupation VARCHAR(100)
+
 );
 
 CREATE TABLE TrainerPokemon (
