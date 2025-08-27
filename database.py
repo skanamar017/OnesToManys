@@ -67,8 +67,8 @@ class PokemonDatabase:
     def update_trainer(self, trainer_id: int, trainer: Trainer) -> Optional[Trainer]:
         with sqlite3.connect(self.db_path) as conn:
             conn.execute(
-                "UPDATE Trainers SET name = ? WHERE id = ?",
-                (trainer.name, trainer_id)
+                "UPDATE Trainers SET name = ?, age = ?, gender = ?, occupation = ? WHERE id = ?",
+                (trainer.name, trainer.age, trainer.gender, trainer.occupation, trainer_id)
             )
             if conn.total_changes == 0:
                 return None
