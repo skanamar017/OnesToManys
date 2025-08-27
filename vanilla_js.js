@@ -37,6 +37,11 @@ document.getElementById("loadTrainers").onclick = async function() {
       e.stopPropagation();
       if (confirm("Delete this trainer?")) {
         await deleteTrainer(trainer.id);
+        // If the deleted trainer is currently selected, clear the TrainerPokemon list and show a message
+        const trainerPokemonList = document.getElementById("trainerPokemonList");
+        if (trainerPokemonList) {
+          trainerPokemonList.innerHTML = "<li>Trainer and their Pokémon have been deleted.</li>";
+        }
         document.getElementById("loadTrainers").click();
       }
     };
@@ -113,12 +118,20 @@ document.getElementById("addTrainer").onclick = async function() {
 
 // --- Update Trainer ---
 async function updateTrainer(trainerId, oldName) {
-  const name = prompt("Enter new name:", oldName);
+  // Fetch the current trainer info (optional, but more robust)
+  const resGet = await fetch(`${apiBase}/Trainers/${trainerId}`);
+  const trainer = resGet.ok ? await resGet.json() : {};
+  const name = prompt("Edit name:", trainer.name || oldName || "");
   if (!name) return;
+  const ageInput = prompt("Edit age:", trainer.age ?? "");
+  const age = ageInput === "" ? null : Number(ageInput);
+  const gender = prompt("Edit gender (Male, Female, Other):", trainer.gender ?? "");
+  const occupation = prompt("Edit occupation:", trainer.occupation ?? "");
+  const trainerData = { name, age, gender, occupation };
   const res = await fetch(`${apiBase}/Trainers/${trainerId}`, {
     method: "PUT",
     headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({name})
+    body: JSON.stringify(trainerData)
   });
   if (res.ok) {
     alert("Trainer updated!");

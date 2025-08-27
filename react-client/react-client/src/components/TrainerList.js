@@ -6,7 +6,7 @@ import {
   deleteTrainer,
 } from "../api";
 
-export default function TrainerList({ onSelect }) {
+export default function TrainerList({ onSelect, onDelete }) {
   const [trainers, setTrainers] = useState([]);
   const [form, setForm] = useState({ name: "", age: "", gender: "", occupation: "" });
 
@@ -20,20 +20,42 @@ export default function TrainerList({ onSelect }) {
 
   async function handleAdd(e) {
     e.preventDefault();
-    await createTrainer(form);
+    const cleanedTrainer = {
+      ...form,
+      age: form.age === "" ? null : Number(form.age),
+    };
+    await createTrainer(cleanedTrainer);
     setForm({ name: "", age: "", gender: "", occupation: "" });
     loadTrainers();
   }
 
   async function handleDelete(id) {
+    // Find the trainer being deleted
+    const deletedTrainer = trainers.find(t => t.id === id);
     await deleteTrainer(id);
     loadTrainers();
+    if (typeof onSelect === 'function' && typeof onDelete === 'function') {
+      onDelete(deletedTrainer);
+    }
   }
 
   async function handleEdit(id) {
-    const name = prompt("New name?");
+    const trainerToUpdate = trainers.find(t => t.id === id);
+    if (!trainerToUpdate) return;
+    const name = prompt("Edit name:", trainerToUpdate.name);
     if (!name) return;
-    await updateTrainer(id, { ...form, name });
+    const ageInput = prompt("Edit age:", trainerToUpdate.age ?? "");
+    const age = ageInput === "" ? null : Number(ageInput);
+    const gender = prompt("Edit gender (Male, Female, Other):", trainerToUpdate.gender ?? "");
+    const occupation = prompt("Edit occupation:", trainerToUpdate.occupation ?? "");
+    const cleanedTrainer = {
+      ...trainerToUpdate,
+      name,
+      age,
+      gender,
+      occupation,
+    };
+    await updateTrainer(id, cleanedTrainer);
     loadTrainers();
   }
 

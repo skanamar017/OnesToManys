@@ -23,8 +23,8 @@ def get_trainer_with_pokemon(trainer_id):
         return jsonify({"error": "Trainer not found"}), 404
     tps = db.get_trainer_pokemons_by_trainer_id(trainer_id)
     return jsonify({
-        "trainer": trainer.dict(),
-        "pokemon": [tp.dict() for tp in tps]
+        "trainer": trainer.model_dump(),
+        "pokemon": [tp.model_dump() for tp in tps]
     }), 200
 
 
@@ -35,7 +35,7 @@ def create_trainer():
     trainer = Trainer(**data)
     try:
         created = db.create_trainer(trainer)
-        return jsonify(created.dict()), 200
+        return jsonify(created.model_dump()), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
@@ -43,13 +43,13 @@ def create_trainer():
 def get_trainer(trainer_id):
     trainer = db.get_trainer(trainer_id)
     if trainer:
-        return jsonify(trainer.dict()), 200
+        return jsonify(trainer.model_dump()), 200
     return jsonify({"error": "Trainer not found"}), 404
 
 @app.route("/Trainers/", methods=["GET"])
 def get_all_trainers():
     trainers = db.get_all_trainers()
-    return jsonify([t.dict() for t in trainers]), 200
+    return jsonify([t.model_dump() for t in trainers]), 200
 
 @app.route("/Trainers/<int:trainer_id>", methods=["PUT"])
 def update_trainer(trainer_id):
@@ -57,7 +57,7 @@ def update_trainer(trainer_id):
     trainer = Trainer(**data)
     updated = db.update_trainer(trainer_id, trainer)
     if updated:
-        return jsonify(updated.dict()), 200
+        return jsonify(updated.model_dump()), 200
     return jsonify({"error": "Trainer not found"}), 404
 
 @app.route("/Trainers/<int:trainer_id>", methods=["DELETE"])
@@ -73,7 +73,7 @@ def create_trainer_pokemon(trainer_id):
     tp = TrainerPokemon(**data)
     try:
         created = db.create_trainer_pokemon(tp)
-        return jsonify(created.dict()), 200
+        return jsonify(created.model_dump()), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
@@ -81,7 +81,7 @@ def create_trainer_pokemon(trainer_id):
 def get_trainer_pokemon(trainer_id, tp_id):
     tp = db.get_trainer_pokemon(tp_id)
     if tp:
-        return jsonify(tp.dict()), 200
+        return jsonify(tp.model_dump()), 200
     return jsonify({"error": "TrainerPokemon not found"}), 404
 
 @app.route("/Trainers/<int:trainer_id>/TrainerPokemon/", methods=["GET"])
@@ -89,7 +89,7 @@ def get_trainer_pokemon(trainer_id, tp_id):
 def get_trainer_pokemons(trainer_id):
     print(f"[DEBUG] get_trainer_pokemons called for trainer_id={trainer_id}")
     tps = db.get_trainer_pokemons_by_trainer_id(trainer_id)
-    return jsonify([tp.dict() for tp in tps]), 200
+    return jsonify([tp.model_dump() for tp in tps]), 200
 
 @app.route("/Trainers/<int:trainer_id>/TrainerPokemon/<int:tp_id>", methods=["PUT"])
 def update_trainer_pokemon(trainer_id, tp_id):
@@ -97,7 +97,7 @@ def update_trainer_pokemon(trainer_id, tp_id):
     tp = TrainerPokemon(**data)
     updated = db.update_trainer_pokemon(tp_id, tp)
     if updated:
-        return jsonify(updated.dict()), 200
+        return jsonify(updated.model_dump()), 200
     return jsonify({"error": "TrainerPokemon not found"}), 404
 
 @app.route("/Trainers/<int:trainer_id>/TrainerPokemon/<int:tp_id>", methods=["DELETE"])

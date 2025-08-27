@@ -30,6 +30,7 @@ class PokemonDatabase:
         """Initialize the database using create 4.sql and insert 7.sql"""
         if not os.path.exists(self.db_path):
             with sqlite3.connect(self.db_path) as conn:
+                conn.execute("PRAGMA foreign_keys = ON")
                 for sql_file in ["create.sql", "insert.sql"]:
                     with open(sql_file, "r") as f:
                         sql_script = f.read()
@@ -78,6 +79,7 @@ class PokemonDatabase:
     def delete_trainer(self, trainer_id: int) -> bool:
         with sqlite3.connect(self.db_path) as conn:
             conn.execute("DELETE FROM Trainers WHERE id = ?", (trainer_id,))
+            conn.execute("DELETE FROM TrainerPokemon WHERE trainer_id = ?", (trainer_id,))
             deleted = conn.total_changes > 0
             conn.commit()
             return deleted
